@@ -137,7 +137,8 @@ def main():
     config = os.path.join(os.path.split(a.ckpt_model)[0], 'config.json')  
     hps = utils.get_hparams_from_file(config) 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    
+
+    print(f"Checkpoint path: {a.ckpt_f0_vqvae}")
     inference(a)
 
 if __name__ == '__main__':
