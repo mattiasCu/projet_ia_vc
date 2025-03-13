@@ -121,13 +121,16 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     wav_list = glob(os.path.join(a.folder, "*.wav"))
-    if len(wav_list) < 2:
-        print("文件夹中的音频文件少于两个，无法进行转换。")
-        return
 
-    sampled_files = random.sample(wav_list, len(wav_list))
-    for i in range(0, len(sampled_files) - 1, 2):
-        inference_pair(sampled_files[i], sampled_files[i+1], a, hps, device)
+    random.shuffle(wav_list)
+    for src_path in wav_list:
+        target_candidates = [x for x in wav_list if x != src_path]
+        if len(target_candidates) < 10:
+            targets = target_candidates
+        else:
+            targets = random.sample(target_candidates, 10)
+        for trg_path in targets:
+            inference_pair(src_path, trg_path, a, hps, device)
 
 if __name__ == '__main__':
     main()
