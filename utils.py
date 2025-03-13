@@ -16,7 +16,6 @@ logger = logging
 
 
 def load_checkpoint(checkpoint_path, model, optimizer=None):
-    print(f"Loading checkpoint from: {checkpoint_path}")
     assert os.path.isfile(checkpoint_path)
     checkpoint_dict = torch.load(checkpoint_path, map_location='cpu')
     iteration = checkpoint_dict['iteration']
