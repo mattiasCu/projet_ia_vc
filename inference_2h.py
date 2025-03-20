@@ -125,10 +125,10 @@ def main():
     random.shuffle(wav_list)
     for src_path in wav_list:
         target_candidates = [x for x in wav_list if x != src_path]
-        if len(target_candidates) < 10:
+        if len(target_candidates) < 50:
             targets = target_candidates
         else:
-            targets = random.sample(target_candidates, 10)
+            targets = random.sample(target_candidates, 50)
         for trg_path in targets:
             inference_pair(src_path, trg_path, a, hps, device)
 
